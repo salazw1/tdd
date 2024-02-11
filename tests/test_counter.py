@@ -55,6 +55,17 @@ class CounterTest(TestCase):
         self.assertEqual(baseline, COUNTERS['chameleon'])
 
 
+    def test_delete_a_counter(self):
+        """It should delete a counter"""
+        result = self.client.post('/counters/dog')
+        self.assertEqual(result.status_code, status.HTTP_201_CREATED)
+        result = self.client.delete('/counters/dog')
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+
+        result = self.client.get('/counters/dog')
+        self.assertEqual(result.status_code, status.HTTP_204_NO_CONTENT)
+
+
 
 
 
